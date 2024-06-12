@@ -1,6 +1,6 @@
 <img src="https://1000logos.net/wp-content/uploads/2021/06/Discord-logo.png" alt="Discord"></img>
 <h1>Discord.js</h1>
-<p>This is a Discord bot made by using  Discord.js. This bot can send new mene / joke every 3600000 / 60 min or 1hr on a specific channel      <br>
+<p>This is a Discord bot made by using  Discord.js. This bot can send new meme/joke every 3600000 / 60 min or 1hr on a specific channel      <br>
    i had used 2 different API to make this bot. 
    
    <ol>
