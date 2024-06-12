@@ -1,29 +1,24 @@
-
 let prefix = "!joke"
 let mem = "!meme"
+let first;
+let second;
 let { Client, GatewayIntentBits } = require('discord.js')
-const { file } = require('googleapis/build/src/apis/file')
+
 let c = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessageTyping] })
 c.once('ready', () => {
     console.log('----------------------')
     console.log('start')
     console.log('----------------------')
-
 })
 let Con = (channel, API, output, outpu, num) => {
     let mes = c.channels.cache.get(channel)
-
     console.log(API)
     fetch(API)
         .then(res => res.json()
-
         )
         .then(data => {
-            console.log(output)
             if (num != 0) {
-                console.log('array')
-                //console.log(data[output][2])
-                //mes.send({file:[data[output][2]]})
+                console.log('This data content Array')
                 mes.send('‎ ‎')
                 mes.send({ files: [data[output][2]] })
                 mes.send('‎ ‎')
@@ -32,14 +27,16 @@ let Con = (channel, API, output, outpu, num) => {
             else {
 
 
+                first = data[output]
+                second = data[outpu]
+                mes.send(first.trim())
+                console.log(`first joke : ${first}`)
 
-                mes.send(data[output])
-                // console.log(data[output])
                 setTimeout(() => {
                     if (outpu != null) {
                         mes.send('‎ ‎')
-                        mes.send(data[outpu])
-                        console.log(data[outpu])
+                        mes.send(second.trim())
+                        console.log(`second joke : ${second}`)
                         mes.send('‎ ‎')
 
                     }
@@ -53,37 +50,47 @@ let Con = (channel, API, output, outpu, num) => {
         ).catch(error => {
             console.log('API NOT RESPONDING')
 
+            let joke = Con('1249686941440413706', 'https://v2.jokeapi.dev/joke/Any', 'setup', 'delivery', "0")
+            meme()
+
 
         })
 
 
 }
-setInterval(() => {
-    console.log('joke')
-    let joke = Con('', 'https://v2.jokeapi.dev/joke/Any', 'setup', 'delivery', "0")
+let start = setInterval(() => {
+
+    console.log("sending joke......")
+    let joke = Con('1249686941440413706', 'https://v2.jokeapi.dev/joke/Any', 'setup', 'delivery', "0")
     meme()
 
 }, 3600000)
 function meme() {
-    console.log('meme')
-    let m = Con('', "https://meme-api.com/gimme", "preview", '2')
+
+    console.log("sending meme.......")
+    let m = Con('1250043669306802257', "https://meme-api.com/gimme", "preview", '2')
 
 
 }
 
 
 c.on('messageCreate', m => {
-    if (m.content.startsWith(prefix)) {
-        let joke = Con('', 'https://v2.jokeapi.dev/joke/Any', 'setup', 'delivery', "0")
-        // let jok = Con('', 'https://v2.jokeapi.dev/joke/Any', 'setup', 'delivery')
+    if (m.content.toLowerCase().startsWith(prefix)) {
+        console.log(`A user name : ${m.author.username}  used !joke`)
+        let joke = Con('1249686941440413706', 'https://v2.jokeapi.dev/joke/Any', 'setup', 'delivery', "0")
+
 
 
     }
-    if (m.content.startsWith(mem)) {
-        let m = Con('', "https://meme-api.com/gimme", "preview", '2')
+    if (m.content.toLowerCase().startsWith(mem)) {
+        console.log(`A user name :${m.author.username}  used !meme`)
+        console.log('-------------------------')
+        let me = Con('1250043669306802257', "https://meme-api.com/gimme", "preview", '2')
 
     }
 })
+
+
 
 
 
